@@ -42,12 +42,12 @@ EXTRA_DIST = cmidiin.dsp midiout.dsp midiprobe.dsp qmidiin.dsp	\
 	sysextest.dsp RtMidi.dsw AlsaHotplug.cmake RunAlsaHotplug.cmake README-hotplug.md
 
 TESTS = apinames
+EXTRA_DIST += coremidiinit-input.sh coremidiinit-output.sh README-coremidi-init.md
 
 if HAVE_CORE
 noinst_PROGRAMS += coremidiinit
 coremidiinit_SOURCES = coremidiinit.cpp
 TESTS += coremidiinit-input.sh coremidiinit-output.sh
-EXTRA_DIST += coremidiinit-input.sh coremidiinit-output.sh README-coremidi-init.md
 endif
 
 if HAVE_ALSA
