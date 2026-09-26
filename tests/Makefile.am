@@ -43,6 +43,13 @@ EXTRA_DIST = cmidiin.dsp midiout.dsp midiprobe.dsp qmidiin.dsp	\
 
 TESTS = apinames
 
+if HAVE_CORE
+noinst_PROGRAMS += coremidiinit
+coremidiinit_SOURCES = coremidiinit.cpp
+TESTS += coremidiinit-input.sh coremidiinit-output.sh
+EXTRA_DIST += coremidiinit-input.sh coremidiinit-output.sh README-coremidi-init.md
+endif
+
 if HAVE_ALSA
 noinst_PROGRAMS += alsahotplug
 alsahotplug_SOURCES = alsahotplug.cpp $(top_srcdir)/RtMidi.cpp

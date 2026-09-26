@@ -262,6 +262,14 @@ if(RTMIDI_BUILD_TESTING)
                INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}
                LINK_LIBRARIES ${LIBRTMIDI})
   add_test(NAME apinames COMMAND apinames)
+  if(RTMIDI_API_CORE)
+    # Compile an isolated backend copy so failure injection cannot affect users.
+    add_executable(coremidiinit tests/coremidiinit.cpp)
+    target_link_libraries(coremidiinit PRIVATE
+      ${COREMIDI_LIB} ${COREFOUNDATION_LIB} ${COREAUDIO_LIB})
+    add_test(NAME coremidiinit_input COMMAND coremidiinit input)
+    add_test(NAME coremidiinit_output COMMAND coremidiinit output)
+  endif()
 endif()
 
 # Set standard installation directories.

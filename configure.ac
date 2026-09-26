@@ -206,6 +206,7 @@ AS_CASE(["$systems"], [*" alsa "*], [
 AS_CASE(["$systems"], [*" core "*], [
   AC_CHECK_HEADER(CoreMIDI/CoreMIDI.h,
     [api="$api -D__MACOSX_CORE__"
+     have_core=yes
      req_libs="$req_libs -framework CoreMIDI -framework CoreAudio -framework CoreFoundation"
      need_pthread=yes
      found="$found CoreMIDI",
@@ -264,6 +265,7 @@ AS_IF([test x"$api" = "x"], [
 CPPFLAGS="$CPPFLAGS $api"
 
 AM_CONDITIONAL([HAVE_ALSA], [test "x$have_alsa" = xyes])
+AM_CONDITIONAL([HAVE_CORE], [test "x$have_core" = xyes])
 AM_CONDITIONAL([NATIVE_BUILD], [test "x$cross_compiling" = xno])
 
 AC_OUTPUT
