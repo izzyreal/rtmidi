@@ -235,12 +235,6 @@ if(RTMIDI_BUILD_MODULES)
   endif()
 endif()
 
-# Compile and run hotplug regression tests whenever the ALSA library is built.
-if("alsa" IN_LIST API_LIST)
-  include(tests/AlsaHotplug.cmake)
-  rtmidi_add_hotplug_test(rtmidi "${CMAKE_CURRENT_SOURCE_DIR}")
-endif()
-
 # Add tests if requested.
 option(RTMIDI_BUILD_TESTING "Build test programs" ON)
 if (NOT DEFINED RTMIDI_BUILD_TESTING OR RTMIDI_BUILD_TESTING STREQUAL "")
@@ -248,6 +242,11 @@ if (NOT DEFINED RTMIDI_BUILD_TESTING OR RTMIDI_BUILD_TESTING STREQUAL "")
 endif()
 if(RTMIDI_BUILD_TESTING)
   include(CTest)
+  # Compile and run hotplug regression tests whenever the ALSA library is built.
+  if("alsa" IN_LIST API_LIST)
+    include(tests/AlsaHotplug.cmake)
+    rtmidi_add_hotplug_test(rtmidi "${CMAKE_CURRENT_SOURCE_DIR}")
+  endif()
   add_executable(cmidiin    tests/cmidiin.cpp)
   add_executable(midiclock  tests/midiclock.cpp)
   add_executable(midiout    tests/midiout.cpp)
